@@ -1,7 +1,9 @@
 import { getFullPokedexNumber } from "../utils"
 import { first151Pokemon } from "../utils"
 
-export function SideNav() {
+export function SideNav(props) {
+    const {selectedPokemon, setSelectedPokemon} = props
+
     return (
         <nav>
             <div className={'header'}>
@@ -11,7 +13,12 @@ export function SideNav() {
             {
                 first151Pokemon.map((pokemon, pokemonIndex) => {
                     return(
-                        <button className={'nav-card'}>
+                        <button 
+                        key={pokemonIndex}
+                        className={'nav-card'}
+                        onClick={()=>{
+                            setSelectedPokemon(pokemonIndex)
+                        }}>
                             <p>{getFullPokedexNumber(pokemonIndex)}</p>
                             <p>{pokemon}</p>
                         </button>
