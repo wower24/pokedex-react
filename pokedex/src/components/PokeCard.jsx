@@ -95,6 +95,40 @@ export default function PokeCard(props) {
             }
         </div>
 
+        <h3>Stats</h3>
+        <div className='stats-card'>
+            {
+                stats.map((statObject, statIndex) => {
+                    const {stat, base_stat} = statObject
+                    return(
+                        <div
+                        key={statIndex}
+                        className='stat-item'>
+                            <p>{stat?.name.replaceAll('-', ' ')}</p>
+                            <h4>{base_stat}</h4>
+                        </div>
+                    )
+                })
+            }
+        </div>
+        <h3>Moves</h3>
+        <div className='pokemon-move-grid'>
+            {
+                moves.map((moveObject, moveIndex) => {
+                    return(
+                        <button
+                        onClick = {() => {
+
+                        }}
+                        key={moveIndex} 
+                        className='button-card pokemon-move'>
+                            <p>{moveObject?.move?.name.replaceAll('-', ' ')}</p>
+                        </button>
+                    )
+                })
+            }
+        </div>
+
     </div>
     )
 }
