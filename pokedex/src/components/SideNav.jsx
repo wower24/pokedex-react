@@ -1,7 +1,7 @@
 import { getFullPokedexNumber } from "../utils"
 import { first151Pokemon } from "../utils"
 
-export function SideNav(props) {
+export default function SideNav(props) {
     const {selectedPokemon, setSelectedPokemon} = props
 
     return (

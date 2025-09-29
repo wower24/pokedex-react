@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
 import { getPokedexNumber } from '../utils'
+import { getFullPokedexNumber } from '../utils'
+import TypeCard from './TypeCard'
 
-export function PokeCard(props) {
+export default function PokeCard(props) {
     const {selectedPokemon} = props
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(false)
+
+    const { name, height, abilities, stats, types, moves, sprites } = data || []
 
     useEffect(
         ()=>{
@@ -44,9 +48,26 @@ export function PokeCard(props) {
         }, 
         [selectedPokemon])
 
+        if(loading || !data) {
+            return(
+                <h4>Loading...</h4>
+            )
+        }
     return (
+    <div>
         <div>
-            
+            <h4>#{getFullPokedexNumber(selectedPokemon)}</h4>
+            <h2>{name}</h2>
         </div>
+        <div className='type-container'>
+            {
+                types.map((type, typeIndex) => {
+                    return (
+                        <TypeCard key={typeIndex} type={type}/>
+                    )
+                })
+            }
+        </div>
+    </div>
     )
 }
