@@ -3,7 +3,7 @@ import { first151Pokemon } from "../utils"
 import { useState } from 'react'
 
 export default function SideNav(props) {
-    const {selectedPokemon, setSelectedPokemon} = props
+    const {selectedPokemon, setSelectedPokemon, handleCloseMenu, showSideMenu} = props
 
     const [searchPhrase, setSearchPhrase] = useState('')
 
@@ -21,11 +21,17 @@ export default function SideNav(props) {
     })
 
     return (
-        <nav>
-            <div className={'header'}>
+        <nav className={'' + (showSideMenu ? 'open' : '')}>
+            <div className={'header ' + (showSideMenu ? 'open' : '')}>
+                <button 
+                className='open-nav-button'
+                onClick = { handleCloseMenu }>
+                    <i class="fa-solid fa-arrow-left-long"></i>
+                </button>
                 <h1 className='text-gradient'>Pokédex</h1>
             </div>
-            <input 
+            <input
+                placeholder='Search...' 
                 value={searchPhrase}
                 onChange={ (e) =>
                     setSearchPhrase(e.target.value)
@@ -41,6 +47,7 @@ export default function SideNav(props) {
                         }
                         onClick={()=>{
                             setSelectedPokemon(first151Pokemon.indexOf(pokemon))
+                            handleCloseMenu()
                         }}>
                             <p>{getFullPokedexNumber(first151Pokemon.indexOf(pokemon))}</p>
                             <p>{pokemon}</p>
